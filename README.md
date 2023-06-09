@@ -1,5 +1,5 @@
 # TUGAS BESAR Mata Kuliah PERANCANGAN APLIKASI SAINS DATA
-# Kelompok 4
+Kelompok 4
 
 Anggota kelompok:
 1. Abror Muhammad Hazim (1305213026)

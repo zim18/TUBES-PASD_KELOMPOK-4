@@ -4,7 +4,7 @@ import plotly.express as px
 
 st.title("Prediction")
 
-st.write("You have entered", st.session_state["my_input"])
+st.write("Anda telah masuk", st.session_state["my_input"])
 
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv')

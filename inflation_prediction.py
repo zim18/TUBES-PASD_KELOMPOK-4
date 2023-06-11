@@ -17,8 +17,8 @@ fig1.update_xaxes(title='Tahun')
 fig1.update_yaxes(title='Tingkat Inflasi')
 
 # Plot tingkat inflasi berdasarkan benua
-fig2 = px.line(df, x='year', y=columns_to_plot_existing, 
-             labels={'variable': 'Benua', 'value': 'Tingkat Inflasi dalam %', 'year': 'Tahun'},
+fig2 = px.line(df, x='Year', y=columns_to_plot_existing, 
+             labels={'variable': 'Benua', 'value': 'Tingkat Inflasi dalam %', 'Year': 'Tahun'},
              title='Tingkat Inflasi Berdasarkan Benua',
              template='plotly',
              markers=True)

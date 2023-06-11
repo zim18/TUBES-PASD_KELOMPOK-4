@@ -2,7 +2,9 @@ import pandas as pd
 import streamlit as st
 import plotly.express as px
 
-st.title("Prediction")
+st.set_page_config(
+    page_title="Prediction",
+)
 
 st.write("Anda telah masuk", st.session_state["my_input"])
 

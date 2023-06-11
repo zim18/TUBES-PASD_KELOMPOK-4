@@ -1,43 +1,44 @@
 import pandas as pd
 import streamlit as st
+from sklearn.ensemble import RandomForestRegressor
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import mean_squared_error
 import plotly.express as px
 
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv')
 
-columns_to_plot = ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
-columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
+# Memilih kolom yang diperlukan untuk prediksi
+features = ['2016', '2017', '2018', '2019', '2020', '2021']
+target = '2022'
 
-df_mean = df[columns_to_plot_existing].mean().reset_index()
-df_mean.columns = ['Year', 'Average Inflation Rate']
+# Menghapus baris yang memiliki nilai kosong
+df_clean = df.dropna(subset=features + [target])
 
-# Plot rata-rata tingkat inflasi per tahun
-fig1 = px.bar(df_mean, x='Year', y='Average Inflation Rate', title='Rata-Rata Tingkat Inflasi per Tahun')
-fig1.update_xaxes(title='Tahun')
-fig1.update_yaxes(title='Tingkat Inflasi')
+# Memisahkan data menjadi data training dan data testing
+X = df_clean[features]
+y = df_clean[target]
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
-# Plot tingkat inflasi berdasarkan benua
-fig2 = px.line(df, x='Year', y=columns_to_plot_existing, 
-             labels={'variable': 'Benua', 'value': 'Tingkat Inflasi dalam %', 'Year': 'Tahun'},
-             title='Tingkat Inflasi Berdasarkan Benua',
-             template='plotly',
-             markers=True)
+# Membuat model Random Forest Regression
+model = RandomForestRegressor()
 
-# Plot penurunan inflasi di tahun 2022
-final = df[['country', 'difference', 'continent']][df['2022'] > 100]
-fig3 = px.bar(final, x='country', y='difference', color='continent', 
-            labels={'continent': 'Benua', 'difference': 'Penurunan Tingkat Inflasi', 'country': 'Negara'}, 
-            title='Penurunan Inflasi di Tahun 2022', 
-            template='plotly')
+# Melakukan fitting model pada data training
+model.fit(X_train, y_train)
 
-# Plot top-10 negara dengan tingkat inflasi yang meningkat
-inflation = df[['country', 'difference', 'continent']][df['2022'] > 100].nlargest(10, 'difference')
-fig4 = px.bar(inflation, x='country', y='difference', color='continent',
-            title='Top-10 Negara dengan Tingkat Inflasi yang Meningkat',
-            labels={'continent': 'Benua', 'difference': 'Increasing Rate'})
+# Memprediksi tingkat inflasi untuk tahun berikutnya menggunakan data testing
+prediksi = model.predict(X_test)
+
+# Menghitung mean squared error (MSE) sebagai evaluasi model
+mse = mean_squared_error(y_test, prediksi)
+print(f"Mean Squared Error: {mse}")
+
+# Membuat dataframe untuk hasil prediksi
+df_prediksi = pd.DataFrame({'Aktual': y_test.values, 'Prediksi': prediksi})
+
+# Visualisasi hasil prediksi menggunakan Plotly
+fig = px.line(df_prediksi, title='Prediksi Tingkat Inflasi')
+fig.update_layout(xaxis_title='Index Data', yaxis_title='Tingkat Inflasi')
 
 # Menampilkan plot di Streamlit
-st.plotly_chart(fig1)
-st.plotly_chart(fig2)
-st.plotly_chart(fig3)
-st.plotly_chart(fig4)
+st.plotly_chart(fig)

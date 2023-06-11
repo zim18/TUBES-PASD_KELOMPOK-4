@@ -3,6 +3,10 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 
+st.title("Preprocessing")
+
+st.write("Anda telah masuk", st.session_state["my_input"])
+
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation.csv', encoding='latin1')
 

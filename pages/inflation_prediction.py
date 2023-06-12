@@ -3,6 +3,7 @@ import streamlit as st
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
+from sklearn.impute import SimpleImputer
 import plotly.express as px
 
 st.set_page_config(
@@ -54,7 +55,9 @@ fig.update_layout(xaxis_title='Index Data', yaxis_title='Tingkat Inflasi')
 # Menampilkan plot di Streamlit
 st.plotly_chart(fig)
 
-# Menghitung rata-rata tingkat inflasi per tahun
+#------------------------------------------
+
+# Memilih variabel yang dibutuhkan
 columns_to_plot = ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
 columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
 
@@ -66,11 +69,16 @@ X_train = df[columns_to_plot_existing]
 y_train = df['2022']
 X_test = pd.DataFrame({'Year': ['2023']})
 
+# Mengisi nilai yang hilang (NaN) menggunakan SimpleImputer
+imputer = SimpleImputer(strategy='mean')
+X_train = imputer.fit_transform(X_train)
+
 # Membuat model Random Forest Regression
 model = RandomForestRegressor()
 model.fit(X_train, y_train)
 
 # Melakukan prediksi untuk tahun 2023
+X_test = imputer.transform(X_test)
 prediksi = model.predict(X_test)
 
 # Membuat dataframe untuk hasil prediksi

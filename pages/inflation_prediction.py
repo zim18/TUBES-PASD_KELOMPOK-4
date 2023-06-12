@@ -67,7 +67,7 @@ df_mean.columns = ['Year', 'Average Inflation Rate']
 # Menyiapkan data untuk pemodelan dan prediksi
 X_train = df[columns_to_plot_existing]
 y_train = df['2022']
-X_test = pd.DataFrame({'Year': ['2023']})
+X_test = pd.DataFrame({'Year': [2023]})  # Mengubah tahun menjadi integer
 
 # Menghapus baris yang mengandung nilai NaN
 X_train.dropna(subset=columns_to_plot_existing, inplace=True)
@@ -82,11 +82,11 @@ model = RandomForestRegressor()
 model.fit(X_train, y_train)
 
 # Melakukan prediksi untuk tahun 2023
-X_test = imputer.transform(X_test)
-prediksi = model.predict(X_test)
+X_test_filled = imputer.transform(X_test)
+prediksi = model.predict(X_test_filled)
 
 # Membuat dataframe untuk hasil prediksi
-df_prediksi = pd.DataFrame({'Year': ['2023'], 'Predicted Inflation Rate': prediksi})
+df_prediksi = pd.DataFrame({'Year': [2023], 'Predicted Inflation Rate': prediksi})
 
 # Visualisasi prediksi tingkat inflasi untuk tahun 2023
 fig_prediksi = px.bar(df_prediksi, x='Year', y='Predicted Inflation Rate', title='Prediksi Tingkat Inflasi untuk Tahun 2023')

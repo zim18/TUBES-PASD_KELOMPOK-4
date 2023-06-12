@@ -57,37 +57,3 @@ st.plotly_chart(fig)
 
 #------------------------------------------
 
-# Memilih variabel yang dibutuhkan
-columns_to_plot = ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
-columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
-
-df_mean = df[columns_to_plot_existing].mean().reset_index()
-df_mean.columns = ['Year', 'Average Inflation Rate']
-
-# Menyiapkan data untuk pemodelan dan prediksi
-X_train = df[columns_to_plot_existing]
-y_train = df['2022']
-X_test = pd.DataFrame({'Year': [2023]})
-
-# Menghapus baris yang mengandung nilai NaN
-X_train.dropna(subset=columns_to_plot_existing, inplace=True)
-y_train = y_train[X_train.index]
-
-# Mengisi nilai yang hilang (NaN) menggunakan SimpleImputer
-imputer = SimpleImputer(strategy='mean')
-X_train_filled = imputer.fit_transform(X_train)
-X_test_filled = imputer.transform(X_test)
-
-# Membuat model Random Forest Regression
-model = RandomForestRegressor()
-model.fit(X_train_filled, y_train)
-
-# Melakukan prediksi untuk tahun 2023
-prediksi = model.predict(X_test_filled)
-
-# Membuat dataframe untuk hasil prediksi
-df_prediksi = pd.DataFrame({'Year': X_test['Year'], 'Predicted Inflation Rate': prediksi})
-
-# Visualisasi prediksi tingkat inflasi untuk tahun 2023
-fig_prediksi = px.bar(df_prediksi, x='Year', y='Predicted Inflation Rate', title='Prediksi Tingkat Inflasi untuk Tahun 2023')
-st.plotly_chart(fig_prediksi)

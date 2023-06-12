@@ -5,6 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error
 import plotly.express as px
 
+st.set_page_config(
+    page_title="Inflation Prediction",
+)
+
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv')
 

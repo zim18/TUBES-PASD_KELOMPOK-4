@@ -8,6 +8,7 @@ st.set_page_config(
 )
 st.sidebar.title("Data Exploration")
 
+
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')
 

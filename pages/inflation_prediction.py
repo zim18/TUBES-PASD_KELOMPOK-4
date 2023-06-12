@@ -9,6 +9,13 @@ st.set_page_config(
     page_title="Inflation Prediction",
 )
 
+st.title("Inflation Prediction")
+st.markdown(
+    """
+    Di bawah ini merupakan hasil dari visualisai tingkat prediksi dan perbandingan dengan nilai aktual 
+    """
+)
+
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv')
 

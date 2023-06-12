@@ -18,7 +18,7 @@ st.markdown(
 )
 
 # load dataset
-df = pd.read_csv('Global_Dataset_of_Inflation_2.csv')
+df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')
 
 # Memilih kolom yang diperlukan untuk prediksi
 features = ['2016', '2017', '2018', '2019', '2020', '2021']

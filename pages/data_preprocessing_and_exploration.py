@@ -6,7 +6,7 @@ import plotly.express as px
 st.set_page_config(
     page_title="Data Exploration",
 )
-
+st.sidebar.title("Data Exploration")
 
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')

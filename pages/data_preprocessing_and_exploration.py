@@ -4,14 +4,12 @@ import numpy as np
 import plotly.express as px
 
 st.set_page_config(
-    page_title="Prediction",
+    page_title="Data Exploration",
 )
 
-st.write("Anda telah masuk", st.session_state["my_input"])
 
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')
-
 
 # membuat visualisasi untuk Rata-Rata Tingkat Inflasi per Tahun
 columns_to_plot = ['2016', '2017', '2018', '2019', '2020', '2021', '2022']

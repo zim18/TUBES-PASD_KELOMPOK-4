@@ -10,7 +10,7 @@ st.sidebar.title("Data Exploration")
 
 st.sidebar.info(
     """
-    [Github](https://github.com/zim18/preprocessing_data-tubes_pasd/tree/main)
+    [Github repository](https://github.com/zim18/preprocessing_data-tubes_pasd/tree/main)
     """
 )
 

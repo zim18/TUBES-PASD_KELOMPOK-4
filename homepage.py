@@ -7,7 +7,7 @@ st.set_page_config(
 
 st.title("Tugas Besar Mata Kuliah Perancangan Aplikasi Sains Data")
 st.sidebar.success("Select a page above.")
-st.info("Click on the left sidebar menu to navigate to the different apps.")
+st.info("Click on the left sidebar menu to navigate to the different pages.")
 
 st.header("Kelompok 4")
 st.header("Anggota Kelompok:")

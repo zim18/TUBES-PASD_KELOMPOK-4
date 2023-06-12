@@ -64,10 +64,6 @@ columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
 df_mean = df[columns_to_plot_existing].mean().reset_index()
 df_mean.columns = ['Year', 'Average Inflation Rate']
 
-# Visualisasi rata-rata tingkat inflasi per tahun
-st.title('Rata-Rata Tingkat Inflasi per Tahun')
-st.plotly_chart(px.bar(df_mean, x='Year', y='Average Inflation Rate', title='Rata-Rata Tingkat Inflasi per Tahun'))
-
 # Menyiapkan data untuk pemodelan dan prediksi
 X_train = df[columns_to_plot_existing]
 y_train = df['2022']

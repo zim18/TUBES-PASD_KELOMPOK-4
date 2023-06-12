@@ -8,6 +8,11 @@ st.set_page_config(
 )
 st.sidebar.title("Data Exploration")
 
+st.sidebar.info(
+    """
+    [Github](https://github.com/zim18/preprocessing_data-tubes_pasd/tree/main)
+    """
+)
 
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')

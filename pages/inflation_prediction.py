@@ -17,6 +17,14 @@ st.markdown(
     """
 )
 
+st.sidebar.title("Inflation Prediction")
+
+st.sidebar.info(
+    """
+    [Source Code](https://github.com/zim18/TUBES-PASD_KELOMPOK-4/blob/main/pages/Data%20Exploration.py)
+    """
+)
+
 # load dataset
 df = pd.read_csv('Global_Dataset_of_Inflation_2.csv', encoding='latin1')
 

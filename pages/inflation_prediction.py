@@ -53,3 +53,17 @@ fig.update_layout(xaxis_title='Index Data', yaxis_title='Tingkat Inflasi')
 
 # Menampilkan plot di Streamlit
 st.plotly_chart(fig)
+
+# Menghitung rata-rata tingkat inflasi per tahun
+columns_to_plot = ['2016', '2017', '2018', '2019', '2020', '2021', '2022']
+columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
+
+df_mean = df[columns_to_plot_existing].mean().reset_index()
+df_mean.columns = ['Year', 'Average Inflation Rate']
+
+# Membuat prediksi untuk tahun 2023
+df_prediksi = pd.DataFrame({'Year': ['2023'], 'Average Inflation Rate': [0]})
+
+# Visualisasi prediksi tingkat inflasi untuk tahun 2023
+fig_prediksi = px.bar(df_prediksi, x='Year', y='Average Inflation Rate', title='Prediksi Tingkat Inflasi untuk Tahun 2023')
+st.plotly_chart(fig_prediksi)

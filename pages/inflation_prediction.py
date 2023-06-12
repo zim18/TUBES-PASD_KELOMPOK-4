@@ -64,10 +64,18 @@ columns_to_plot_existing = [col for col in columns_to_plot if col in df.columns]
 df_mean = df[columns_to_plot_existing].mean().reset_index()
 df_mean.columns = ['Year', 'Average Inflation Rate']
 
+# Visualisasi rata-rata tingkat inflasi per tahun
+st.title('Rata-Rata Tingkat Inflasi per Tahun')
+st.plotly_chart(px.bar(df_mean, x='Year', y='Average Inflation Rate', title='Rata-Rata Tingkat Inflasi per Tahun'))
+
 # Menyiapkan data untuk pemodelan dan prediksi
 X_train = df[columns_to_plot_existing]
 y_train = df['2022']
 X_test = pd.DataFrame({'Year': ['2023']})
+
+# Menghapus baris yang mengandung nilai NaN
+X_train.dropna(subset=columns_to_plot_existing, inplace=True)
+y_train = y_train[X_train.index]
 
 # Mengisi nilai yang hilang (NaN) menggunakan SimpleImputer
 imputer = SimpleImputer(strategy='mean')

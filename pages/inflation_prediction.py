@@ -21,7 +21,7 @@ st.sidebar.title("Inflation Prediction")
 
 st.sidebar.info(
     """
-    [Source Code](https://github.com/zim18/TUBES-PASD_KELOMPOK-4/blob/main/pages/Data%20Exploration.py)
+    [Source Code](https://github.com/zim18/TUBES-PASD_KELOMPOK-4/blob/main/pages/inflation_prediction.py)
     """
 )
 
